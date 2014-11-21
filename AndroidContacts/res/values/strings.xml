@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">AndroidContacts</string>
+    <string name="str_add_button">New contact</string>
+    <string name="str_retrieve_button">Retrieve list</string>
+
+</resources>
