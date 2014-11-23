@@ -65,6 +65,11 @@ public class Directory extends Observable{
 		notifyObservers();
 	}
 	
+	public void removeContact(Contact c){
+		this.contacts.remove(c.getId());
+	}
+	
+	
 	public void addLocalContact(Contact c){
 		this.added.add(c);
 		

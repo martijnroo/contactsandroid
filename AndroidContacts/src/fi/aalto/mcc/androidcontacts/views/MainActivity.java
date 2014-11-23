@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,7 +44,8 @@ public class MainActivity extends Activity implements Observer{
 	
 	
 	public void add(View v){
-		
+		Intent intent = new Intent(this, NewContactActivity.class);
+		this.startActivity(intent);
 	}
 	
 	public void retrieve(View v){

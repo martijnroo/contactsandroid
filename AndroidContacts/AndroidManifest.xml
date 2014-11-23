@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name="fi.aalto.mcc.androidcontacts.views.ContactDisplayActivity"></activity>
+        <activity android:name="fi.aalto.mcc.androidcontacts.views.NewContactActivity"></activity>
     </application>
 
 </manifest>

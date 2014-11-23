@@ -45,11 +45,40 @@ public class ContactsAPI {
 	}
 	
 	
-	public void add(Contact c){
+	public void add(final Contact c){
+		
+		new Thread(){
+			@Override
+			public void run() {
+				
+				try {
+					
+					JSONObject params = new JSONObject();
+					params.put("name", c.getName());
+					params.put("phone", c.getPhone());
+					params.put("email", c.getEmail());
+					
+					HttpRequest.request(url, Method.POST, params.toString());
+					retrieve();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}.start();
 		
 	}
 	
-	public void remove(Contact c){
+	public void remove(final Contact c){
+		
+		new Thread(){
+			public void run(){
+				HttpRequest.request(url, Method.DELETE, c.getId());
+				Directory.getInstance().removeContact(c);
+				retrieve();
+			}
+		}.start();
 		
 	}
 	
