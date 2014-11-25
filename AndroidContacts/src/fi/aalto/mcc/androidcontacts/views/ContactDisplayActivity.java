@@ -21,22 +21,24 @@ public class ContactDisplayActivity extends Activity {
 		Intent i = getIntent();
 		this.contact = (Contact) i.getSerializableExtra("contact");
 		
+		setText(R.id.text_id, contact.getId());
+		setText(R.id.text_name, contact.getName());
+		setText(R.id.text_phone, contact.getPhone());
+		setText(R.id.text_email, contact.getEmail());
 		
-		TextView tvId = (TextView) findViewById(R.id.text_id);
-		TextView tvNa = (TextView) findViewById(R.id.text_name);
-		TextView tvPo = (TextView) findViewById(R.id.text_phone);
-		TextView tvEm = (TextView) findViewById(R.id.text_email);
-		
-		tvId.setText(contact.getId());
-		tvNa.setText(contact.getName());
-		tvPo.setText(contact.getPhone());
-		tvEm.setText(contact.getEmail());
-		
+	}
+	
+	private void setText(int id, String txt){
+		((TextView) findViewById(id)).setText(txt);
 	}
 	
 	
 	public void remove(View v){
-		ContactsAPI.getInstance().remove(this.contact);
+		ContactsAPI.getInstance().remove(this.contact, this);
+	}
+	
+	public void back(View v){
+		this.finish();
 	}
 	
 	

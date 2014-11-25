@@ -23,6 +23,26 @@
             android:text="@string/str_retrieve_button" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/sync_from_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="syncFrom"
+            android:text="@string/sync_from_button" />
+
+        <Button
+            android:id="@+id/sync_to_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="syncTo"
+            android:text="@string/sync_to_button" />
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

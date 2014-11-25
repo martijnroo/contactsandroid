@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import fi.aalto.mcc.androidcontacts.model.Contact;
 import fi.aalto.mcc.androidcontacts.model.Directory;
 
@@ -45,7 +46,7 @@ public class ContactsAPI {
 	}
 	
 	
-	public void add(final Contact c){
+	public void add(final Contact c, final Activity act){
 		
 		new Thread(){
 			@Override
@@ -59,6 +60,10 @@ public class ContactsAPI {
 					params.put("email", c.getEmail());
 					
 					HttpRequest.request(url, Method.POST, params.toString());
+					
+					if(act != null){
+						act.finish();
+					}
 					retrieve();
 					
 				} catch (Exception e) {
@@ -70,18 +75,28 @@ public class ContactsAPI {
 		
 	}
 	
-	public void remove(final Contact c){
+	public void remove(final Contact c, final Activity act){
 		
 		new Thread(){
 			public void run(){
 				HttpRequest.request(url, Method.DELETE, c.getId());
 				Directory.getInstance().removeContact(c);
 				retrieve();
+				act.finish();
 			}
 		}.start();
 		
 	}
 	
+
+	public void removeAll() {
+		new Thread(){
+			public void run(){
+				HttpRequest.request(url, Method.DELETE, "");
+				retrieve();
+			}
+		}.start();
+	}
 	
 	
 	/**
@@ -104,5 +119,6 @@ public class ContactsAPI {
 		}
 		return instance;
 	}
+
 	
 }

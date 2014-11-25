@@ -13,6 +13,7 @@ import fi.aalto.mcc.androidcontacts.R;
 import fi.aalto.mcc.androidcontacts.model.Contact;
 import fi.aalto.mcc.androidcontacts.model.Directory;
 import fi.aalto.mcc.androidcontacts.net.ContactsAPI;
+import fi.aalto.mcc.androidcontacts.util.SynchronizationTool;
 
 public class MainActivity extends Activity implements Observer{
 
@@ -23,6 +24,9 @@ public class MainActivity extends Activity implements Observer{
 		
 		// Observer
 		Directory.getInstance().addObserver(this);
+		
+		// Retrieve contacts
+		retrieve(null);
 		
 		// Generating view
 		update(null, null);
@@ -50,6 +54,15 @@ public class MainActivity extends Activity implements Observer{
 	
 	public void retrieve(View v){
 		ContactsAPI.getInstance().retrieve();
+	}
+	
+	
+	public void syncFrom(View v){
+		SynchronizationTool.syncFromPhone(this);
+	}
+	
+	public void syncTo(View v){
+		
 	}
 
 

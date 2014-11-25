@@ -3,6 +3,8 @@
     <string name="app_name">AndroidContacts</string>
     <string name="str_add_button">New contact</string>
     <string name="str_retrieve_button">Retrieve list</string>
+    <string name="sync_from_button">Sync from phone</string>
+    <string name="sync_to_button">Sync to phone</string>
     <string name="display_contact_id">id</string>
     <string name="display_contact_name">Name</string>
     <string name="display_contact_phone">Phone</string>
@@ -11,6 +13,8 @@
     <string name="new_contact_phone">Phone</string>
     <string name="new_contact_email">Email</string>
     <string name="new_contact_create">Create contact</string>
+    <string name="new_contact_back">Back</string>
     <string name="display_rm_button">Remove contact</string>
+    <string name="display_back_button">Back</string>
 
 </resources>

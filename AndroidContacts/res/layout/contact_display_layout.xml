@@ -93,6 +93,12 @@
             android:onClick="remove"
             android:layout_height="wrap_content"
             android:text="@string/display_rm_button" />
+        <Button
+            android:id="@+id/display_back_button"
+            android:layout_width="wrap_content"
+            android:onClick="back"
+            android:layout_height="wrap_content"
+            android:text="@string/display_back_button" />
 
     </TableRow>
 
