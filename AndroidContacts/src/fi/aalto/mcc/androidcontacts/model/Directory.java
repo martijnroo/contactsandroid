@@ -18,31 +18,13 @@ public class Directory extends Observable{
 	private HashMap<String, Contact> contacts;
 
 	/**
-	 * The local contacts not saved yet on the REST Api
-	 */
-	private ArrayList<Contact> added;
-
-	
-	/**
-	 * Get a contact from the list
-	 * @param id
-	 * @return
-	 */
-	public Contact getFromId(String id){
-		return this.contacts.get(id);
-	}
-	
-	/**
 	 * Gets all the contacts (local + saved)
 	 * @return
 	 */
 	public Contact[] getAllContacts(){
 		
 		ArrayList<Contact> ret = new ArrayList<Contact>();
-		
-		for(Contact c : added){
-			ret.add(c);
-		}
+
 		for(Entry<String,Contact> c : contacts.entrySet()){
 			ret.add(c.getValue());
 		}
@@ -65,26 +47,13 @@ public class Directory extends Observable{
 		notifyObservers();
 	}
 	
+	/**
+	 * Removes a contact from the local contacts
+	 * @param c the contact to remove
+	 */
 	public void removeContact(Contact c){
 		this.contacts.remove(c.getId());
 	}
-	
-	
-	public void addLocalContact(Contact c){
-		this.added.add(c);
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void emptyLocal(){
-		this.added = new ArrayList<Contact>();
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	
 	
 	/**
 	 * static Singleton instance
@@ -95,7 +64,6 @@ public class Directory extends Observable{
 	 * Private constructor for singleton
 	 */
 	private Directory() {
-		this.added = new ArrayList<Contact>();
 		this.contacts = new HashMap<String, Contact>();
 	}
 

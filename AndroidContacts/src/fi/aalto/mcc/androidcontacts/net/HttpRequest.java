@@ -21,9 +21,20 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * This class is used to do the requests used for the needs of the application.
+ * Some requests don't need parameters (GET for instance)
+ * to support parameters, changes might be required
+ */
 public class HttpRequest {
 
-
+	/**
+	 * General request
+	 * @param url The url to reach
+	 * @param method the http request to use
+	 * @param params the parameters to transmit (might not be used)
+	 * @return the content of the http response
+	 */
 	public static String request(String url, Method method, String ... params){
 		switch (method) {
 		case GET:
@@ -40,7 +51,11 @@ public class HttpRequest {
 	}
 
 
-
+	/**
+	 * Performs a Get request
+	 * @param url the url to reach
+	 * @return the response of the get request
+	 */
 	private static String doGet(String url){
 
 		HttpClient httpclient = new DefaultHttpClient();
@@ -50,7 +65,12 @@ public class HttpRequest {
 	}
 
 
-
+	/**
+	 * Performs a Post request
+	 * @param url the url to reach
+	 * @param params the parameters to send, must be given in JSON
+	 * @return the response of the Post request
+	 */
 	private static String doPost(String url, String ... params){
 		String ret = "";
 
@@ -58,7 +78,7 @@ public class HttpRequest {
 		HttpPost req = new HttpPost(url);
 
 		try{
-
+			// Adding the parameters
 			JSONObject json = new JSONObject(params[0]);
 			List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 
@@ -75,29 +95,50 @@ public class HttpRequest {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		
+		// Performing the request
 		ret = getResponse(httpclient, req);
 
 		return ret;
 	}
 
 
-
+	/**
+	 * Performs a Delete request
+	 * @param url the url to reach
+	 * @param params the parameters to send
+	 * @return the response of the get request
+	 */
 	private static String doDelete(String url, String ... params){
+		
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpUriRequest req = new HttpDelete(url+params[0]);
+		
 		return getResponse(httpclient, req);
 	}
 
 
-
+	/**
+	 * Not used in this application
+	 * @param url the url to reach
+	 * @param params the parameters to send
+	 * @return nothing
+	 */
 	private static String doPut(String url, String ... params){
 		return "";
 	}
 
+	/**
+	 * Performs the Http request
+	 * @param httpclient the http client
+	 * @param req the uri request
+	 * @return the content of the response
+	 */
 	private static String getResponse(HttpClient httpclient, HttpUriRequest req){
 
 		try {
 			HttpResponse response = httpclient.execute(req);
+			
 			StatusLine statusLine = response.getStatusLine();
 			if(statusLine.getStatusCode() == HttpStatus.SC_OK){
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -105,6 +146,7 @@ public class HttpRequest {
 				out.close();
 				return out.toString();
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

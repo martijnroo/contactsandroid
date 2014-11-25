@@ -15,6 +15,11 @@ import fi.aalto.mcc.androidcontacts.model.Directory;
 import fi.aalto.mcc.androidcontacts.net.ContactsAPI;
 import fi.aalto.mcc.androidcontacts.util.SynchronizationTool;
 
+/**
+ * Main Activity, used to list the contacts, retrieve them, and requesting the synchronizations
+ * @author bgoubin
+ *
+ */
 public class MainActivity extends Activity implements Observer{
 
 	@Override
@@ -33,36 +38,57 @@ public class MainActivity extends Activity implements Observer{
 	}
 	
 	
-	
+	/**
+	 * Sets the list of contacts with the contacts in the Directory
+	 */
 	private void setList(){
+		// Getting the elements
 		ListView lv = (ListView) findViewById(R.id.listview);
+		
+		// Getting the contacts
 		Contact[] values = Directory.getInstance().getAllContacts();
 		
+		// Setting the list
 		ArrayAdapter<Contact> adapter = new ArrayAdapter<Contact>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
 		lv.setAdapter(adapter);
 		
+		// Setting the listener of the list
 		lv.setOnItemClickListener(new ListListener(this, lv));
 		
 	}
 	
 	
-	
+	/**
+	 * onclick reaction to go to the creation of a contact
+	 * @param v
+	 */
 	public void add(View v){
 		Intent intent = new Intent(this, NewContactActivity.class);
 		this.startActivity(intent);
 	}
 	
+	/**
+	 * onclick reaction to retrieve the contacts
+	 * @param v
+	 */
 	public void retrieve(View v){
 		ContactsAPI.getInstance().retrieve();
 	}
 	
-	
+	/**
+	 * onclick reaction to synchronize the contacts from to phone to the REST API
+	 * @param v
+	 */
 	public void syncFrom(View v){
 		SynchronizationTool.syncFromPhone(this);
 	}
 	
+	/**
+	 * onclick reaction to synchronize the contacts from the REST API to the phone
+	 * @param v
+	 */
 	public void syncTo(View v){
-		
+		SynchronizationTool.syncToPhone(this);
 	}
 
 
@@ -70,6 +96,7 @@ public class MainActivity extends Activity implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		runOnUiThread(new Runnable() {
 		     public void run() {
+		    	 // updating the list
 		    	 setList();
 		    }
 		});

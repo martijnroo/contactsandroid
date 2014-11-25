@@ -126,15 +126,7 @@ public class Contact implements Serializable {
 	
 	@Override
 	public String toString() {
-		String ret = "";
-		
-		ret += name;
-		//ret += "id:"+id+" ";
-		//ret += "name:"+name+" ";
-		//ret += "phone:"+phone+" ";
-		//ret += "email:"+email;
-		
-		return ret;
+		return this.name;
 	}
 	
 	
