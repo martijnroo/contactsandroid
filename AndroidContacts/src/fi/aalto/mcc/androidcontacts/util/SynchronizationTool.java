@@ -60,7 +60,7 @@ public class SynchronizationTool {
 	 * @param act the activity that requested the operation
 	 * @return the Contact list
 	 */
-	private static ArrayList<Contact> getContactsFromPhone(Activity act) {
+	public static ArrayList<Contact> getContactsFromPhone(Activity act) {
 		ArrayList<Contact> ret = new ArrayList<Contact>();
 
 		// Getting the database content
@@ -137,7 +137,7 @@ public class SynchronizationTool {
 	 * @param act the activity that requested the operation
 	 * @param contact the contact to save
 	 */
-	private static void saveContactToPhone(Activity act, Contact contact){
+	public static void saveContactToPhone(Activity act, Contact contact){
 		ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
 
 		// Raw contact

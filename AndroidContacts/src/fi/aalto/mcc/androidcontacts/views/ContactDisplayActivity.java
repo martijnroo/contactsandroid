@@ -8,6 +8,7 @@ import android.widget.TextView;
 import fi.aalto.mcc.androidcontacts.R;
 import fi.aalto.mcc.androidcontacts.model.Contact;
 import fi.aalto.mcc.androidcontacts.net.ContactsAPI;
+import fi.aalto.mcc.androidcontacts.util.SynchronizationTool;
 
 /**
  * Activity used to display one contact and its informations
@@ -60,6 +61,15 @@ public class ContactDisplayActivity extends Activity {
 	 * @param v
 	 */
 	public void back(View v){
+		this.finish();
+	}
+	
+	/**
+	 * onclick reaction to go back to the main activity
+	 * @param v
+	 */
+	public void syncTo(View v){
+		SynchronizationTool.saveContactToPhone(this, this.contact);
 		this.finish();
 	}
 	
