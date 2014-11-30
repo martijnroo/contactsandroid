@@ -1,0 +1,3 @@
+# Use
+
+To use the application install it on an Android phone with Android version 4.2.2 or higher. This may require allowing installation from unknown sources. After that the application can be used. There are buttons for listing all contacts after which the details of any contact can be shown, there is a button to delete a contact, create a new one and to sync to and from the phone's address book.
