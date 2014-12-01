@@ -1,5 +1,6 @@
 package fi.aalto.mcc.androidcontacts.views;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,12 +21,12 @@ import fi.aalto.mcc.androidcontacts.util.SynchronizationTool;
  * @author bgoubin
  *
  */
-public class MainActivity extends Activity implements Observer{
+public class SelectorActivity extends Activity implements Observer{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_layout);
+		setContentView(R.layout.contact_selector_layout);
 		
 		// Observer
 		Directory.getInstance().addObserver(this);
@@ -46,14 +47,15 @@ public class MainActivity extends Activity implements Observer{
 		ListView lv = (ListView) findViewById(R.id.listview);
 		
 		// Getting the contacts
-		Contact[] values = Directory.getInstance().getAllContacts();
+//		Contact[] values = Directory.getInstance().getAllContacts();
+		ArrayList<Contact> values = SynchronizationTool.getContactsFromPhone(this);
 		
 		// Setting the list
 		ArrayAdapter<Contact> adapter = new ArrayAdapter<Contact>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
 		lv.setAdapter(adapter);
 		
 		// Setting the listener of the list
-		lv.setOnItemClickListener(new ListListener(this, lv));
+		lv.setOnItemClickListener(new SelectorListListener(this, lv));
 		
 	}
 	
@@ -80,9 +82,7 @@ public class MainActivity extends Activity implements Observer{
 	 * @param v
 	 */
 	public void syncFrom(View v){
-		Intent intent = new Intent(this, SelectorActivity.class);
-		this.startActivity(intent);
-//		SynchronizationTool.syncFromPhone(this);
+		SynchronizationTool.syncFromPhone(this);
 	}
 	
 	/**
